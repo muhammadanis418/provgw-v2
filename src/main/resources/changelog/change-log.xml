@@ -1,0 +1,31 @@
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    
+    <changeSet author="Nouman Ahmed" id="1">
+        <addColumn tableName="NumberMapping">
+            <column name="language" type="varchar(5)" defaultValue="ur"/>
+        </addColumn>
+        
+        <createTable tableName="vn_off_alerts">
+            <column name="msisdn" type="varchar(13)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notified" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>

@@ -1,0 +1,225 @@
+package rules
+
+import  com.rockville.wariddn.provgwv2.dto.SubAdditionalParameters;
+import  com.rockville.wariddn.provgwv2.util.OperationType;
+import  com.rockville.wariddn.provgwv2.dto.Request;
+
+//global com.rockville.wariddn.provgwv2.dto.Request request;
+
+//dialect "mvel"
+
+rule "SubSilent"
+    when
+        request : Request( methodName == "SubSilent" );
+    then
+        request.setSubAdditionalParameters(new SubAdditionalParameters(false, OperationType.SUB_NORMAL.name(),false,false,false));
+        request.setSendSms(false);
+        request.setMethodName("parentSubAllNewImpl");
+end;
+
+rule "HandleRawSub"
+    when
+        request : Request( getMethodName() == "HandleRawSub" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentSubRaw");
+end;
+
+rule "Handle1"
+    when
+        request : Request( getMethodName() == "Handle1" );
+    then
+        request.setSendSms(true);
+		request.setDigit("1");
+		request.setMethodName("parentHandleDigits");
+end;
+
+rule "Handle2"
+    when
+        request : Request( getMethodName() == "Handle2" );
+    then
+        request.setSendSms(true);
+		request.setDigit("2");
+		request.setMethodName("parentHandleDigits");
+end;
+
+rule "Handle3"
+    when
+        request : Request( getMethodName() == "Handle3" );
+    then
+        request.setSendSms(true);
+		request.setDigit("3");
+		request.setMethodName("parentHandleDigits");
+end;
+
+rule "Handle4"
+    when
+        request : Request( getMethodName() == "Handle4" );
+    then
+        request.setSendSms(true);
+		request.setDigit("4");
+		request.setMethodName("parentHandleDigits");
+end;
+
+rule "Handle5"
+    when
+        request : Request( getMethodName() == "Handle5" );
+    then
+        request.setSendSms(true);
+		request.setDigit("5");
+		request.setMethodName("parentHandleDigits");
+end;
+
+rule "Help"
+    when
+        request : Request( getMethodName() == "Help" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentHelp");
+end;
+
+rule "Off"
+    when
+        request : Request( getMethodName() == "Off" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentOff");
+end;
+
+rule "On"
+    when
+        request : Request( getMethodName() == "On" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentOn");
+end;
+
+rule "Unsub"
+    when
+        request : Request( getMethodName() == "Unsub" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentUnsub");
+end;
+
+rule "UnBlock"
+    when
+        request : Request( getMethodName() == "UnBlock" );
+    then
+        request.setSendSms(true);
+		request.setCommand("UNBLOCK");
+		request.setMethodName("parentAddRemoveBlocklist");
+end;
+
+rule "Meeting"
+    when
+        request : Request( getMethodName() == "Meeting" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentMeeting");
+end;
+
+rule "Sig"
+    when
+        request : Request( getMethodName() == "Sig" );
+    then
+        request.setSendSms(true);
+		request.setSigRequest(true);
+		request.setStatusRequest(false);
+		request.setMethodName("parentSigAndMyStatus");
+end;
+
+rule "HRHandler"
+    when
+        request : Request( getMethodName() == "HRHandler" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentHRHandler");
+end;
+
+rule "Info"
+    when
+        request : Request( getMethodName() == "Info" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentInfo");
+end;
+
+rule "BlockListAdd"
+    when
+        request : Request( getMethodName() == "BlockListAdd" );
+    then
+        request.setSendSms(true);
+		request.setCommand("ADD");
+		request.setMethodName("parentAddRemoveBlocklist");
+end;
+
+rule "BlockListRemove"
+    when
+        request : Request( getMethodName() == "BlockListRemove" );
+    then
+        request.setSendSms(true);
+		request.setCommand("REMOVE");
+		request.setMethodName("parentAddRemoveBlocklist");
+end;
+
+rule "WhiteListAdd"
+    when
+        request : Request( getMethodName() == "WhiteListAdd" );
+    then
+        request.setSendSms(true);
+		request.setCommand("ADD");
+		request.setMethodName("parentAddRemoveWhitelist");
+end;
+
+rule "WhiteListRemove"
+    when
+        request : Request( getMethodName() == "WhiteListRemove" );
+    then
+        request.setSendSms(true);
+		request.setCommand("REMOVE");
+		request.setMethodName("parentAddRemoveWhitelist");
+end;
+
+rule "SubIvrNormal"
+    when
+        request : Request( getMethodName() == "SubIvrNormal" );
+    then
+        request.setSendSms(true);
+		request.setDigit("2");
+		request.setMethodName("parentHandleIVR");
+end;
+
+rule "SubIvrGolden"
+    when
+        request : Request( getMethodName() == "SubIvrGolden" );
+    then
+        request.setSendSms(true);
+		request.setDigit("1");
+		request.setMethodName("parentHandleIVR");
+end;
+
+rule "ViewBlackList"
+    when
+        request : Request( getMethodName() == "ViewBlackList" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentViewBlackList");
+end;
+
+rule "ViewWhiteList"
+    when
+        request : Request( getMethodName() == "ViewWhiteList" );
+    then
+        request.setSendSms(true);
+		request.setMethodName("parentViewWhiteList");
+end;
+
+rule "SubFreeWithReply"
+    when
+        request : Request( getMethodName() == "SubFreeWithReply" );
+    then
+        request.setSendSms(true);
+		request.setSubAdditionalParameters(new SubAdditionalParameters(true,  OperationType.SUB_NORMAL_FREE.name(), true, false, false));
+		request.setMethodName("parentSubAllNewImpl");
+end;
